@@ -13,12 +13,7 @@ router.get('/', (req, res) => {
         model: Category
       },
       {
-        model: Tag,
-        include: [
-          {
-            model: ProductTag
-          }
-        ]
+        model: Tag
       }
     ]
   })
@@ -42,12 +37,7 @@ router.get('/:id', (req, res) => {
         model: Category
       },
       {
-        model: Tag,
-        include: [
-          {
-            model: ProductTag
-          }
-        ]
+        model: Tag
       }
     ]
   }).then(productData=>{
