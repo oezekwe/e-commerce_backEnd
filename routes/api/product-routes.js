@@ -33,11 +33,10 @@ router.get('/:id', (req, res) => {
       id: req.params.id
     },
     include: [
+      Category,
       {
-        model: Category
-      },
-      {
-        model: Tag
+        model: Tag,
+        through: ProductTag
       }
     ]
   }).then(productData=>{
@@ -65,8 +64,7 @@ router.post('/', (req, res) => {
   Product.create({
     product_name: req.body.product_name,
     price: req.body.price,
-    stock: req.body.stock,
-    tagIds: req.body.category_id
+    stock: req.body.stock
   })
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
@@ -126,7 +124,7 @@ router.put('/:id', (req, res) => {
     })
     .then((updatedProductTags) => res.json(updatedProductTags))
     .catch((err) => {
-      // console.log(err);
+      console.log(err);
       res.status(400).json(err);
     });
 });
